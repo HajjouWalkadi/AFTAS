@@ -16,26 +16,35 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member getMemberById(Long id) {
-        return null;
+        return memberRepository.findById(id).orElse(null);
     }
 
     @Override
     public Member addMember(Member member) {
-        return null;
+        return memberRepository.save(member);
     }
 
     @Override
     public List<Member> searchMember(String name) {
-        return null;
+        return memberRepository.findByName(name);
     }
 
     @Override
     public Member updateMember(Member member, Long id) {
-        return null;
+        Member existingMember = getMemberById(id);
+        existingMember.setName(member.getName());
+        existingMember.setFamilyName(member.getFamilyName());
+        existingMember.setAccessionDate(member.getAccessionDate());
+        existingMember.setNationality(member.getNationality());
+        existingMember.setIdentityNumber(member.getIdentityNumber());
+        existingMember.setIdentityDocumentType(member.getIdentityDocumentType());
+
+        return memberRepository.save(existingMember);
     }
 
     @Override
     public void deleteMember(Long id) {
+        memberRepository.deleteById(id);
 
     }
 }
