@@ -3,9 +3,10 @@ package com.example.aftas.service.Impl;
 import com.example.aftas.domain.Member;
 import com.example.aftas.repository.MemberRepository;
 import com.example.aftas.service.MemberService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
