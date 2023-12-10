@@ -6,20 +6,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class Competition {
+@Data
+public class Fish {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String code;
-    private String date;
-    private String startTime;
-    private String endTime;
-    private int numberOfParticipants;
-    private String location;
-    private int amount;
+    private String name;
+    private double averageWeight;
 }
