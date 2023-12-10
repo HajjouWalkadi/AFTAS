@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -45,6 +46,10 @@ public class Member {
     @Column(unique = true)
     private String identityNumber;
 
+    @OneToMany(mappedBy = "member")
+    private List<Ranking> rankings;
 
+    @OneToMany(mappedBy = "member")
+    private List<Hunting> huntings;
 
 }

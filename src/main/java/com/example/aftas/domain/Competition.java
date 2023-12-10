@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -22,4 +24,7 @@ public class Competition {
     private int numberOfParticipants;
     private String location;
     private int amount;
+
+    @OneToMany(mappedBy = "competition")
+    private List<Ranking> rankings;
 }

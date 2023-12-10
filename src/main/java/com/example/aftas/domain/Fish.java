@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,4 +19,10 @@ public class Fish {
     private Long id;
     private String name;
     private double averageWeight;
+
+    @OneToMany(mappedBy = "fish")
+    private List<Hunting> huntings;
+
+    @ManyToOne
+    private Level level;
 }
