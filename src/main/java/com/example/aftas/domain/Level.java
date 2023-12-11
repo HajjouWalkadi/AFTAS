@@ -24,3 +24,4 @@ public class Level {
     @OneToMany(mappedBy = "level")
     private List<Fish> fishes;
 }
+
