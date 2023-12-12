@@ -2,6 +2,7 @@ package com.example.aftas.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -14,6 +15,7 @@ import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,6 +28,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EntityListeners(AuditingEntityListener.class)
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
@@ -35,7 +38,7 @@ public class Competition {
     private Long id;
 
     @NotNull(message = "Code cannot be empty")
-    @Size(min = 6, max = 20, message = "Code must be between 6 and 20 characters")
+    @Column(unique = true)
     private String code;
 
     @NotNull(message = "date cannot be empty")
@@ -52,21 +55,25 @@ public class Competition {
     private LocalTime endTime;
 
     @NotNull(message = "Number of participants cannot be empty")
+    @Min(value = 0, message = "Amount must be greater than 0")
     //@Range(min = 2, max = 100, message = "Number of participants must be between 10 and 100 characters")
     private int numberOfParticipants;
 
     @NotNull(message = "Location cannot be empty")
+    @Size(min = 2, max = 50, message = "Location must be between 2 and 50 characters")
     //@Pattern(regexp = "^[a-zA-Z0-9\\s,.-]+$", message = "Invalid location format")
     private String location;
 
     @NotNull(message = "Amount cannot be empty")
     @Positive(message = "Amount must be positive")
-    private Double amount;
+    @Min(value = 0, message = "Amount must be greater than 0")
+    private int amount;
 
 
     @OneToMany(mappedBy = "competition")
-    @Cascade(CascadeType.ALL)
-    private List<Ranking> rankings;
+    //@Cascade(CascadeType.ALL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private List<Ranking> ranking;
 
     @OneToMany(mappedBy = "competition")
     private List<Hunting> hunting;

@@ -8,6 +8,7 @@ import java.util.List;
 public interface HuntingService {
     Hunting getHuntingById(Long id);
     Hunting addHunting(Hunting hunting);
-    Hunting updateHunting(Hunting hunting, Long id);
+    List<Hunting> getHuntingsByCompetition(Long competitionId);
+    List<Hunting> getHuntingsByCompetitionAndMember(Long competitionId, Long memberId);
     void deleteHunting(Long id);
 }

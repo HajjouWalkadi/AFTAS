@@ -2,6 +2,7 @@ package com.example.aftas.domain;
 
 import com.example.aftas.enums.IdentityDocumentType;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -11,6 +12,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 import java.util.List;
@@ -41,8 +44,9 @@ public class Member {
     @Temporal(TemporalType.DATE)
     private Date accessionDate;
 
-    @NotNull(message = "Nationality cannot be null")
+    @NotNull(message = "Nationality cannot be empty")
     private String nationality;
+
     @Enumerated(EnumType.STRING)
     private IdentityDocumentType identityDocumentType;
 
@@ -52,9 +56,20 @@ public class Member {
     private String identityNumber;
 
     @OneToMany(mappedBy = "member")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Ranking> rankings;
 
     @OneToMany(mappedBy = "member")
-    private List<Hunting> huntings;
+    private List<Hunting> hunting;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date updatedAt;
 
 }
