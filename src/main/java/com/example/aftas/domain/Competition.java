@@ -1,5 +1,6 @@
 package com.example.aftas.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
@@ -10,8 +11,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Range;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -32,17 +39,20 @@ public class Competition {
     private String code;
 
     @NotNull(message = "date cannot be empty")
-    //@PastOrPresent(message = "Date must be in the past or present")
-    private String date;
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
 
     @NotNull(message = "Start time cannot be empty")
-    private String startTime;
+    @JsonFormat(pattern = "HH:mm:ss")
+    private LocalTime startTime;
 
     @NotNull(message = "End time cannot be empty")
-    private String endTime;
+    @JsonFormat(pattern = "HH:mm:ss")
+    private LocalTime endTime;
 
     @NotNull(message = "Number of participants cannot be empty")
-    //@Range(min = 10, max = 100, message = "Number of participants must be between 10 and 100 characters")
+    //@Range(min = 2, max = 100, message = "Number of participants must be between 10 and 100 characters")
     private int numberOfParticipants;
 
     @NotNull(message = "Location cannot be empty")
@@ -57,4 +67,17 @@ public class Competition {
     @OneToMany(mappedBy = "competition")
     @Cascade(CascadeType.ALL)
     private List<Ranking> rankings;
+
+    @OneToMany(mappedBy = "competition")
+    private List<Hunting> hunting;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date updatedAt;
 }

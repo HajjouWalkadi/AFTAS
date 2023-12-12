@@ -1,6 +1,8 @@
 package com.example.aftas.domain;
 
 import com.example.aftas.enums.IdentityDocumentType;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -18,6 +20,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
