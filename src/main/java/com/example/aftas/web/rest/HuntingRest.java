@@ -37,7 +37,8 @@ public class HuntingRest {
     }
 
    public ResponseEntity getHuntingsByCompetition(@PathVariable Long competitionId){
-       List<Hunting> huntings = huntingService.
+       //List<Hunting> huntings = huntingService.
+               return null;
    }
 
     @DeleteMapping("/{id}")
