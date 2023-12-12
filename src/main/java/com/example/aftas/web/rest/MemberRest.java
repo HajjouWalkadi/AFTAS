@@ -65,7 +65,7 @@ public class MemberRest {
             return ResponseMessage.notFound("Member not found");
         }else {
             memberService.deleteMember(id);
-            return ResponseMessage.ok("Member deleted successfully", member);
+            return ResponseMessage.ok("Member deleted successfully", null);
         }
     }
 }

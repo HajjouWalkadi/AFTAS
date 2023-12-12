@@ -66,7 +66,7 @@ public class CompetitionRest {
             return ResponseMessage.notFound("Competition not found");
         }else {
             competitionService.deleteCompetition(id);
-            return ResponseMessage.ok("Competition deleted successfully", competition);
+            return ResponseMessage.ok("Competition deleted successfully", null);
         }
     }
 
