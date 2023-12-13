@@ -3,6 +3,7 @@ package com.example.aftas.web.rest;
 import com.example.aftas.domain.Competition;
 import com.example.aftas.domain.Ranking;
 import com.example.aftas.dto.CompetitionRequestDTO;
+import com.example.aftas.dto.MemberRegistrationRequestDTO;
 import com.example.aftas.dto.RankingRequestDTO;
 import com.example.aftas.handler.response.ResponseMessage;
 import com.example.aftas.service.CompetitionService;
@@ -64,6 +65,7 @@ public class CompetitionRest {
 
     @PutMapping("/{id}")
     public ResponseEntity updateCompetition(@RequestBody CompetitionRequestDTO competitionRequestDTO , @PathVariable Long id){
+        System.out.println(competitionRequestDTO);
         Competition competition1 = competitionService.updateCompetition(competitionRequestDTO.toCompetition(), id);
         if (competition1 == null) {
             return ResponseMessage.badRequest("Competition not updated");
@@ -89,7 +91,10 @@ public class CompetitionRest {
         return ResponseMessage.ok("The competition results have been successfully logged", ranking);
     }
 
-    public ResponseEntity registerMem(@Valid @RequestBody )
-
+    @PostMapping("/register-member")
+    public ResponseEntity registerMemberCompetition(@Valid @RequestBody MemberRegistrationRequestDTO memberRegistrationRequestDTO){
+        Ranking ranking = competitionService.registerMemberCompetition(memberRegistrationRequestDTO.toRegister());
+        return ResponseMessage.ok("Member registered successfully", ranking);
+    }
 
 }

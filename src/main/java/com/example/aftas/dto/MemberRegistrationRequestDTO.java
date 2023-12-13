@@ -9,7 +9,7 @@ public record MemberRegistrationRequestDTO(
         Long memberId
 ) {
 
-    public Ranking toRanking() {
+    public Ranking toRegister() {
         return Ranking.builder()
                 .member(Member.builder().id(memberId).build())
                 .competition(Competition.builder().id(competitionId).build())
