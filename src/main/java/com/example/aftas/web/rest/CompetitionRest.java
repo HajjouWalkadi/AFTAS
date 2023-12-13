@@ -1,6 +1,8 @@
 package com.example.aftas.web.rest;
 
 import com.example.aftas.domain.Competition;
+import com.example.aftas.domain.Ranking;
+import com.example.aftas.dto.RankingRequestDTO;
 import com.example.aftas.handler.response.ResponseMessage;
 import com.example.aftas.service.CompetitionService;
 import jakarta.validation.Valid;
@@ -29,7 +31,7 @@ public class CompetitionRest {
     }
 
     @PostMapping
-    public ResponseEntity addCopetition(@Valid @RequestBody Competition competition) {
+    public ResponseEntity addCompetition(@Valid @RequestBody Competition competition) {
         Competition competition1 = competitionService.addCompetition(competition);
         if (competition1 == null) {
             return ResponseMessage.badRequest("Competition not created");
@@ -69,5 +71,13 @@ public class CompetitionRest {
             return ResponseMessage.ok("Competition deleted successfully", null);
         }
     }
+
+    public ResponseEntity rankingCompetitionResult(@Valid @RequestBody RankingRequestDTO rankingRequestDTO, @PathVariable Long id) {
+        Ranking ranking = competitionService.
+
+    }
+
+
+
 
 }
