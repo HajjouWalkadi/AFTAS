@@ -27,7 +27,7 @@ public record CompetitionRequestDTO(
         LocalTime endTime,
 
         @NotNull(message = "Location cannot be null")
-        @Size(min = 3, max = 70, message = "Location must be between 2 and 50 characters")
+        @Size(min = 3, max = 70, message = "Location must be between 3 and 70 characters")
         String location,
 
         @NotNull(message = "Amount cannot be null")
