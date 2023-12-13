@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.Range;
 
 public record FishRequestDTO (
         @NotNull(message = "Name is required")
-        @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
+        @Size(min = 3, max = 60, message = "Name must be between 3 and 60 characters")
         @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Name must be alphanumeric")
         @Column(unique = true)
         String name,
