@@ -1,6 +1,7 @@
 package com.example.aftas.web.rest;
 
 import com.example.aftas.domain.Member;
+import com.example.aftas.dto.MemberRequestDTO;
 import com.example.aftas.handler.response.ResponseMessage;
 import com.example.aftas.service.MemberService;
 import jakarta.validation.Valid;
@@ -29,8 +30,8 @@ public class MemberRest {
     }
 
     @PostMapping
-    public ResponseEntity addMember(@Valid @RequestBody Member member) {
-        Member member1 = memberService.addMember(member);
+    public ResponseEntity addMember(@Valid @RequestBody MemberRequestDTO memberRequestDTO) {
+        Member member1 = memberService.addMember(memberRequestDTO.toMember());
         if (member1 == null) {
             return ResponseMessage.badRequest("Member not created");
         }else {
@@ -38,8 +39,8 @@ public class MemberRest {
         }
     }
 
-    @GetMapping
-    public ResponseEntity searchMember(@RequestBody String name) {
+    @GetMapping("/search")
+    public ResponseEntity search(@RequestBody String name) {
         List<Member> members = memberService.searchMember(name);
         if (members.isEmpty()) {
             return ResponseMessage.notFound("Member not found");

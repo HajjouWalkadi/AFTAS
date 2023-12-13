@@ -7,11 +7,11 @@ import jakarta.validation.constraints.Size;
 
 public record MemberRequestDTO(
         @NotNull(message = "Name is required")
-        @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
+        @Size(min = 3, max = 70, message = "Name must be between 3 and 70 characters")
         String name,
 
         @NotNull(message = "Family name is required")
-        @Size(min = 2, max = 50, message = "Family name must be between 2 and 50 characters")
+        @Size(min = 3, max = 70, message = "Family name must be between 3 and 70 characters")
         String familyName,
 
         @NotNull(message = "Nationality is required")
