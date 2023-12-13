@@ -48,6 +48,7 @@ public class LevelRest {
         }
     }
 
+
     @PutMapping("/{id}")
     public ResponseEntity updateLevel(@Valid @RequestBody Level level, @PathVariable Long id) {
         Level level1 = levelService.updateLevel(level, id);

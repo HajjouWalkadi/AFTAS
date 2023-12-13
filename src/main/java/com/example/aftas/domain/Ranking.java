@@ -7,6 +7,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.util.Date;
 
 @Entity
 @AllArgsConstructor
@@ -16,6 +21,7 @@ import lombok.NoArgsConstructor;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
 @Builder
+@EntityListeners(AuditingEntityListener.class)
 public class Ranking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,4 +34,14 @@ public class Ranking {
     @ManyToOne
     private Member member;
 
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date updatedAt;
 }
