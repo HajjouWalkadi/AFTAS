@@ -11,6 +11,7 @@ public interface CompetitionService {
 
     Competition getCompetitionById(Long id);
     Competition addCompetition(Competition competition);
+    List<Competition> getAllCompetitions();
     List<Competition> searchCompetition(String code);
     Competition updateCompetition(Competition competition, Long id);
     void deleteCompetition(Long id);

@@ -37,6 +37,11 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
+    public List<Competition> getAllCompetitions() {
+        return competitionRepository.findAll();
+    }
+
+    @Override
     public List<Competition> searchCompetition(String code) {
         return competitionRepository.findByCode(code);
     }

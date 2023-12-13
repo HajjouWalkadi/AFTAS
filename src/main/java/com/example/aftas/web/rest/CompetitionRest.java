@@ -30,6 +30,16 @@ public class CompetitionRest {
         }
     }
 
+    @GetMapping
+    public ResponseEntity getAllCompetitions() {
+        List<Competition> competitions = competitionService.getAllCompetitions();
+        if(competitions.isEmpty()) {
+            return ResponseMessage.notFound("Competition not found");
+        }else {
+            return ResponseMessage.ok("Success", competitions);
+        }
+    }
+
     @PostMapping
     public ResponseEntity addCompetition(@Valid @RequestBody Competition competition) {
         Competition competition1 = competitionService.addCompetition(competition);
@@ -41,7 +51,7 @@ public class CompetitionRest {
     }
 
 
-    @GetMapping
+  /*  @GetMapping
     public ResponseEntity searchCompetition(@RequestBody String code) {
         List<Competition> competitions = competitionService.searchCompetition(code);
         if (competitions.isEmpty()) {
@@ -49,7 +59,7 @@ public class CompetitionRest {
         }else {
             return ResponseMessage.ok("Success", competitions);
         }
-    }
+    }*/
 
     @PutMapping("/{id}")
     public ResponseEntity updateCompetition(@RequestBody Competition competition, @PathVariable Long id){
@@ -73,11 +83,7 @@ public class CompetitionRest {
     }
 
     public ResponseEntity rankingCompetitionResult(@Valid @RequestBody RankingRequestDTO rankingRequestDTO, @PathVariable Long id) {
-        Ranking ranking = competitionService.
-
+        Ranking ranking = competitionService.rankingCompetitionResult(rankingRequestDTO.toRanking(), id);
+        return ResponseMessage.ok("The competition results have been successfully logged", ranking);
     }
-
-
-
-
 }
