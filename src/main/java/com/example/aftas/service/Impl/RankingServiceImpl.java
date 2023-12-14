@@ -25,16 +25,17 @@ public class RankingServiceImpl implements RankingService {
 
     @Override
     public Ranking getRankingById(RankingId id) {
-        return rankingRepository.findById(id).orElseThrow(() -> new RuntimeException("Ranking id " + id + "not found"));
+        return rankingRepository.findById(id).orElseThrow(() -> new RuntimeException("Ranking with id " + id + " not found"));
     }
 
     @Override
     public Ranking getRankingByCompetitionIdAndMemberId(Long competitionId, Long memberId) {
         //check if competition exists
         competitionRepository.findById(competitionId).orElseThrow(()-> new RuntimeException("Competition with id :" + competitionId + " not found"));
+
         Ranking ranking = rankingRepository.findByMemberIdAndCompetitionId(memberId,competitionId);
         if (ranking == null) {
-            throw new RuntimeException("Member id " + memberId + " not found");
+            throw new RuntimeException("Member with id " + memberId + " not registred in this competition");
         }
         //check if member exists
         memberService.getMemberById(memberId);
