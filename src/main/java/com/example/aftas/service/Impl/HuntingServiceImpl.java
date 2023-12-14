@@ -79,12 +79,12 @@ public class HuntingServiceImpl implements HuntingService {
         return huntingRepository.findByCompetitionIdAndMemberId(competitionId, memberId);
     }
 
-    @Override
+   @Override
     public Hunting updateHunting(Hunting hunting, Long id) {
         Hunting existingHunting = getHuntingById(id);
-        existingHunting.setFish(hunting.getFish());
-        existingHunting.setMember(hunting.getMember());
-        existingHunting.setCompetition(hunting.getCompetition());
+        //existingHunting.setFish(hunting.getFish());
+        //existingHunting.setMember(hunting.getMember());
+        //existingHunting.setCompetition(hunting.getCompetition());
         existingHunting.setNumberOfFish(hunting.getNumberOfFish());
         return huntingRepository.save(existingHunting);
     }
