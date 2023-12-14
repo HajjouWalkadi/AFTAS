@@ -36,4 +36,10 @@ public class CustomExceptionHandler {
         ResponseMessage responseMessage = new ResponseMessage(HttpStatus.NOT_FOUND.value(), exception.getMessage());
         return ResponseEntity.badRequest().body(responseMessage);
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ResponseMessage> handleRuntimeException(RuntimeException exception) {
+        ResponseMessage responseMessage = new ResponseMessage(HttpStatus.NOT_FOUND.value(), exception.getMessage());
+        return ResponseEntity.badRequest().body(responseMessage);
+    }
 }
