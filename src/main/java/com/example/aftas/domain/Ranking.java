@@ -17,21 +17,28 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@JsonIdentityInfo(
+/*@JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+        property = "id")*/
 @Builder
 @EntityListeners(AuditingEntityListener.class)
+
 public class Ranking {
-    @Id
+   /* @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;*/
+   @EmbeddedId
+   private RankingId id;
     private int rank;
     private int score;
 
     @ManyToOne
+    @JoinColumn(name = "competition_id")
+    @MapsId("competitionId")
     private Competition competition;
     @ManyToOne
+    @JoinColumn(name = "member_id")
+    @MapsId("memberId")
     private Member member;
 
 
