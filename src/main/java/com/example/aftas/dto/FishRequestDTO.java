@@ -19,14 +19,14 @@ public record FishRequestDTO (
         @NotNull(message = "Average weight is required")
         @Range(min = 0, max = 1000, message = "Weight must be between 0 and 1000")
         @Positive(message = "Weight must be greater than 0")
-        double weight,
+        double averageWeight,
 
         Long levelId
 ){
     public Fish toFish() {
         Fish.FishBuilder fishBuilder = new Fish().builder()
                 .name(name)
-                .averageWeight(weight);
+                .averageWeight(averageWeight);
         if(levelId != null) {
             fishBuilder.level(Level.builder().id(levelId).build());
         }

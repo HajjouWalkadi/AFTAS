@@ -5,6 +5,7 @@ import com.example.aftas.dto.FishRequestDTO;
 import com.example.aftas.handler.response.ResponseMessage;
 import com.example.aftas.service.FishService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +13,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/fish")
+@RequiredArgsConstructor // create constructor for all the final properties
 public class FishRest {
-    private FishService fishService;
+    private final FishService fishService;
 
 
     @GetMapping("/{id}")
