@@ -3,6 +3,7 @@ package com.example.aftas.service.Impl;
 import com.example.aftas.domain.Competition;
 import com.example.aftas.domain.Member;
 import com.example.aftas.domain.Ranking;
+import com.example.aftas.domain.RankingId;
 import com.example.aftas.handler.exception.OperationException;
 import com.example.aftas.handler.exception.ResourceNotFoundException;
 import com.example.aftas.repository.CompetitionRepository;
@@ -67,7 +68,7 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public Ranking rankingCompetitionResult(Ranking ranking, Long id) {
+    public Ranking rankingCompetitionResult(Ranking ranking, RankingId id) {
         return rankingService.updateRankingScore(ranking, id);
     }
 
