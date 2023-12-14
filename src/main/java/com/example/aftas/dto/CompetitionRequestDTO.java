@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public record CompetitionRequestDTO(
+        @NotNull(message = "Code could not be null") String code,
         @NotNull(message = "Name cannot be null")
         @Temporal(TemporalType.DATE)
         @JsonFormat(pattern = "yyyy-MM-dd")
@@ -42,6 +43,7 @@ public record CompetitionRequestDTO(
 
     public Competition toCompetition() {
         return Competition.builder()
+                .code(code)
                 .date(date)
                 .startTime(startTime)
                 .endTime(endTime)
