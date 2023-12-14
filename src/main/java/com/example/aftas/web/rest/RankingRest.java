@@ -8,7 +8,10 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1/ranking")
 public class RankingRest {
     private final RankingService rankingService;
@@ -31,25 +34,18 @@ public class RankingRest {
         return ResponseMessage.ok("Success", ranking);
     }
 
-
-
-    @PostMapping
-    public ResponseEntity addRanking(@Valid @RequestBody Ranking ranking){
-        Ranking ranking1 = rankingService.addRanking(ranking);
-        if (ranking1 == null) {
-            return ResponseMessage.badRequest("Failed to add ranking");
-        }else {
-            return ResponseMessage.created("Ranking added successfully", ranking1);
-        }
-
+    @GetMapping("/competitions/{id}/podium")
+    public ResponseEntity findPodiumByCompetitionCode(@PathVariable Long id) {
+        List<Ranking> rankings=rankingService.findPodiumByCompetitionId(id);
+        return ResponseMessage.ok("Success",rankings);
     }
 
-    @PutMapping("/{id}")
+/*    @PutMapping("/{id}")
 
     public ResponseEntity updateRanking(@RequestBody Ranking ranking, @PathVariable RankingId id) {
         Ranking ranking1 = rankingService.updateRanking(ranking, id);
         return ResponseMessage.ok("Success", ranking1);
-    }
+    }*/
 
 
     @DeleteMapping("/{id}")

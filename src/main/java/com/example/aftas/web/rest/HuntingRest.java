@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1/hunting")
 public class HuntingRest {
     private final HuntingService huntingService;
@@ -57,7 +58,7 @@ public class HuntingRest {
         }
     }
 
-    @PutMapping("/{id}")
+   @PutMapping("/{id}")
     public ResponseEntity updateHunting(@RequestBody HuntingUpdateRequestDTO huntingUpdateRequestDTO, @PathVariable Long id) {
         Hunting hunting = huntingService.updateHunting(huntingUpdateRequestDTO.toHunting(), id);
         if(hunting == null) {
@@ -71,16 +72,6 @@ public class HuntingRest {
             huntingService.deleteHunting(id);
             return ResponseMessage.ok("Hunting deleted successfully", null);
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }
