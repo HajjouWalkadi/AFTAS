@@ -1,15 +1,16 @@
 package com.example.aftas.service;
 
 import com.example.aftas.domain.Ranking;
+import com.example.aftas.domain.RankingId;
 
 public interface RankingService {
 
-    Ranking getRankingById(Long id);
+    Ranking getRankingById(RankingId id);
     Ranking getRankingByCompetitionIdAndMemberId(Long competitionId, Long memberId);
     Ranking addRanking(Ranking ranking);
-    Ranking updateRanking(Ranking ranking, Long id);
-    Ranking updateRankingScore(Ranking ranking, Long id);
-    void deleteRanking(Long id);
+    Ranking updateRanking(Ranking ranking, RankingId id);
+    Ranking updateRankingScore(Ranking ranking, RankingId id);
+    void deleteRanking(RankingId id);
 
 
 }
