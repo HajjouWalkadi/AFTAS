@@ -11,10 +11,12 @@ import com.example.aftas.repository.RankingRepository;
 import com.example.aftas.service.CompetitionService;
 import com.example.aftas.service.MemberService;
 import com.example.aftas.service.RankingService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
@@ -41,6 +43,11 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
+    public Competition findByCode(String code) {
+        return competitionRepository.findByCode(code).orElse(null);
+    }
+
+    @Override
     public Competition addCompetition(Competition competition) {
 
         // here i want to check that Every day there can be only one competition
@@ -62,14 +69,18 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     }
 
-    public static String generateCode(String location, Date date) {
-        String locationCode = location.substring(0, 3).toLowerCase();
-
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yy-MM-dd");
-        String formattedDate = dateFormatter.format(date);
-
-        return locationCode + "-" + formattedDate;
+    @Override
+    public List<Competition> getAllCompetitions() {
+        return competitionRepository.findAll();
     }
+
+    @Override
+    public List<Competition> getAllCompetitionsPaginated(Pageable pageable) {
+        return competitionRepository.findAll(pageable).getContent();
+    }
+
+
+
 
     public static String generateCode(String location, LocalDate date) {
         String locationCode = location.substring(0, 3).toLowerCase();
@@ -80,10 +91,10 @@ public class CompetitionServiceImpl implements CompetitionService {
         return locationCode + "-" + formattedDate;
     }
 
-    @Override
-    public List<Competition> getAllCompetitions() {
-        return competitionRepository.findAll();
-    }
+   /* @Override
+    public List<Competition> getAllCompetitions(Pageable pageable) {
+        return competitionRepository.findAll(pageable).getContent();
+    }*/
 
 
     @Override
