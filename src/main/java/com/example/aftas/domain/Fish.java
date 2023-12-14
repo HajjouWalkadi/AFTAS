@@ -1,5 +1,6 @@
 package com.example.aftas.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -41,6 +42,7 @@ public class Fish {
     private List<Hunting> hunting;
 
     @ManyToOne
+    @JsonBackReference
     private Level level;
 
     @CreationTimestamp

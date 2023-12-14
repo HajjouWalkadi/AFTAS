@@ -1,10 +1,9 @@
 package com.example.aftas.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -22,6 +21,7 @@ public class Level {
     private int points;
 
     @OneToMany(mappedBy = "level")
+    @JsonManagedReference
     private List<Fish> fishes;
 }
 
