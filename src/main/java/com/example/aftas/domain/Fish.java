@@ -38,7 +38,7 @@ public class Fish {
     @Positive(message = "Weight must be greater than 0")
     private double averageWeight;
 
-    @OneToMany(mappedBy = "fish")
+    @OneToMany(mappedBy = "fish",cascade=CascadeType.ALL)
     private List<Hunting> hunting;
 
     @ManyToOne

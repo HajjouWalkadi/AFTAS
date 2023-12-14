@@ -33,7 +33,7 @@ public class Member {
     private Long id;
 
     @Column(unique = true)
-    private int referenceNumber;
+    private Integer referenceNumber;
 
     @NotNull(message = "Name cannot be null")
     @Size(min = 3, max = 40, message = "Name must be between 3 and 40 characters")
