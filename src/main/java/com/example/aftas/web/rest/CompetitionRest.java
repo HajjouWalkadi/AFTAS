@@ -85,9 +85,9 @@ public class CompetitionRest {
         }
     }
 
-    @PostMapping("/{id}/result-ranking")
-    public ResponseEntity rankingCompetitionResult(@Valid @RequestBody RankingRequestDTO rankingRequestDTO, @PathVariable Long id) {
-        Ranking ranking = competitionService.rankingCompetitionResult(rankingRequestDTO.toRanking(), id);
+    @PostMapping("/result-ranking")
+    public ResponseEntity rankingCompetitionResult(@Valid @RequestBody RankingRequestDTO rankingRequestDTO) {
+        Ranking ranking = competitionService.rankingCompetitionResult(rankingRequestDTO.toRanking(), rankingRequestDTO.id());
         return ResponseMessage.ok("The competition results have been successfully logged", ranking);
     }
 
