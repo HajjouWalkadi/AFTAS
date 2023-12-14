@@ -27,7 +27,7 @@ public class HuntingRest {
 
 
     @PostMapping
-    public ResponseEntity addHunting(HuntingRequestDTO huntingRequestDTO){
+    public ResponseEntity addHunting(@RequestBody HuntingRequestDTO huntingRequestDTO){
         Hunting hunting1 = huntingService.addHunting(huntingRequestDTO.toHunting());
         if (hunting1 == null) {
             return ResponseMessage.badRequest("Hunting not added");

@@ -2,11 +2,13 @@ package com.example.aftas.web.rest;
 
 import com.example.aftas.domain.Competition;
 import com.example.aftas.domain.Ranking;
+import com.example.aftas.domain.RankingId;
 import com.example.aftas.dto.CompetitionRequestDTO;
 import com.example.aftas.dto.MemberRegistrationRequestDTO;
 import com.example.aftas.dto.RankingRequestDTO;
 import com.example.aftas.handler.response.ResponseMessage;
 import com.example.aftas.service.CompetitionService;
+import com.example.aftas.service.RankingService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +19,11 @@ import java.util.List;
 @RequestMapping("/api/v1/competitions")
 public class CompetitionRest {
     private final CompetitionService competitionService;
+    private final RankingService rankingService;
 
-    public CompetitionRest(CompetitionService competitionService) {
+    public CompetitionRest(CompetitionService competitionService, RankingService rankingService) {
         this.competitionService = competitionService;
+        this.rankingService = rankingService;
     }
 
     @GetMapping("/{id}")
@@ -29,6 +33,17 @@ public class CompetitionRest {
             return ResponseMessage.notFound("Competition not found");
         }else {
             return ResponseMessage.ok("Success", competition);
+        }
+    }
+
+    @GetMapping("/{competitionId}/rank")
+    public ResponseEntity getCompetitionById(@PathVariable Long competitionId, @RequestParam("memberId") Long memberId) {
+        Ranking ranking = rankingService.getRankingById(RankingId.builder().competitionId(competitionId).memberId(memberId).build());
+
+        if (ranking == null) {
+            return ResponseMessage.notFound("Competition not found");
+        }else {
+            return ResponseMessage.ok("Success", ranking);
         }
     }
 
@@ -91,7 +106,7 @@ public class CompetitionRest {
         return ResponseMessage.ok("The competition results have been successfully logged", ranking);
     }
 
-    @PostMapping("/register-member")
+    @PostMapping("/signin-member")
     public ResponseEntity registerMemberCompetition(@Valid @RequestBody MemberRegistrationRequestDTO memberRegistrationRequestDTO){
         Ranking ranking = competitionService.registerMemberCompetition(memberRegistrationRequestDTO.toRegister());
         return ResponseMessage.ok("Member registered successfully", ranking);
