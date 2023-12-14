@@ -10,12 +10,15 @@ import com.example.aftas.handler.response.ResponseMessage;
 import com.example.aftas.service.CompetitionService;
 import com.example.aftas.service.RankingService;
 import jakarta.validation.Valid;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1/competitions")
 public class CompetitionRest {
     private final CompetitionService competitionService;
@@ -26,9 +29,9 @@ public class CompetitionRest {
         this.rankingService = rankingService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity getCompetitionById(@PathVariable Long id) {
-        Competition competition = competitionService.getCompetitionById(id);
+    @GetMapping("/{code}")
+    public ResponseEntity getCompetitionById(@PathVariable String code) {
+        Competition competition = competitionService.findByCode(code);
         if (competition == null) {
             return ResponseMessage.notFound("Competition not found");
         }else {
@@ -56,6 +59,22 @@ public class CompetitionRest {
             return ResponseMessage.ok("Success", competitions);
         }
     }
+
+  /*  @GetMapping
+    public ResponseEntity getAllCompetitionsPaginated(@RequestParam @DefaultValue("0") Integer page, @RequestParam Integer size) {
+
+        //List<Competition> competitions = competitionService.getAllCompetitions(@RequestParam @DefaultValue("0") Integer page, @RequestParam Integer size);
+        List<Competition> competitions;
+        if (size != null)
+            competitions = competitionService.getAllCompetitions(PageRequest.of(page, size));
+        else
+            competitions = competitionService.getAllCompetitions(size);
+        if(competitions.isEmpty()) {
+            return ResponseMessage.notFound("Competition not found");
+        }else {
+            return ResponseMessage.ok("Success", competitions);
+        }
+    }*/
 
     @PostMapping
     public ResponseEntity addCompetition(@Valid @RequestBody CompetitionRequestDTO competitionRequestDTO) {
