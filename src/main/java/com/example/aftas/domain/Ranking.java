@@ -27,8 +27,8 @@ public class Ranking {
    /* @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;*/
-   @EmbeddedId
-   private RankingId id;
+    @EmbeddedId
+    private RankingId id;
     private int rank;
     private int score;
 

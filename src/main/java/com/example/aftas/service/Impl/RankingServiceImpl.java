@@ -30,6 +30,8 @@ public class RankingServiceImpl implements RankingService {
 
     @Override
     public Ranking getRankingByCompetitionIdAndMemberId(Long competitionId, Long memberId) {
+        //check if member exists
+        memberService.getMemberById(memberId);
         //check if competition exists
         competitionRepository.findById(competitionId).orElseThrow(()-> new RuntimeException("Competition with id :" + competitionId + " not found"));
 
@@ -37,8 +39,7 @@ public class RankingServiceImpl implements RankingService {
         if (ranking == null) {
             throw new RuntimeException("Member with id " + memberId + " not registred in this competition");
         }
-        //check if member exists
-        memberService.getMemberById(memberId);
+
         return ranking;
 
     }

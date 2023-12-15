@@ -16,13 +16,13 @@ public class RankingRest {
     public RankingRest(RankingService rankingService) {
         this.rankingService = rankingService;
     }
-/*
+
     @GetMapping("/{id}")
-    public ResponseEntity getRankingById(@PathVariable RankingId id) {
+    public ResponseEntity getRankingById(RankingId id) {
         Ranking ranking = rankingService.getRankingById(id);
         return ResponseMessage.ok("Success", ranking);
-    }*/
-/*
+    }
+
 
     @GetMapping
 
@@ -30,7 +30,7 @@ public class RankingRest {
         Ranking ranking = rankingService.getRankingByCompetitionIdAndMemberId(competitionId, memberId);
         return ResponseMessage.ok("Success", ranking);
     }
-*/
+
 
 
     @PostMapping
