@@ -8,13 +8,14 @@ import com.example.aftas.domain.Member;
 public record HuntingRequestDTO(
         Long competitionId,
         Long memberId,
-        Long fishedId
+        Long fishId,
+        Double averageWeight
 ) {
     public Hunting toHunting() {
         return Hunting.builder()
                 .competition(Competition.builder().id(competitionId).build())
                 .member(Member.builder().id(memberId).build())
-                .fish(Fish.builder().id(fishedId).build())
+                .fish(Fish.builder().id(fishId).averageWeight(averageWeight).build())
                 .build();
     }
 }
