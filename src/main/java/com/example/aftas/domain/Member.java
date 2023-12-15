@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +32,9 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
+    private int referenceNumber;
+
     @NotNull(message = "Name cannot be null")
     @Size(min = 3, max = 40, message = "Name must be between 3 and 40 characters")
     private String name;
@@ -42,7 +46,7 @@ public class Member {
     @NotNull(message = "Access date cannot be null")
     @PastOrPresent(message = "Access date must be in the past or present")
     @Temporal(TemporalType.DATE)
-    private Date accessionDate;
+    private LocalDate accessionDate;
 
     @NotNull(message = "Nationality cannot be empty")
     private String nationality;
@@ -51,7 +55,7 @@ public class Member {
     private IdentityDocumentType identityDocumentType;
 
     @NotNull(message = "Identity cannot be null")
-    @Size(min = 6, max = 14, message = "Identity must be between 6 and 14 characters")
+    //@Size(min = 6, max = 14, message = "Identity must be between 6 and 14 characters")
     @Column(unique = true)
     private String identityNumber;
 

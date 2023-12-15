@@ -8,7 +8,8 @@ import java.util.List;
 public interface MemberService {
     Member getMemberById(Long id);
     Member addMember(Member member);
-    List<Member> searchMember(String name);
+    List<Member> searchByMemberNameOrNumber(String search);
+    List<Member> getAllMembers();
     Member updateMember(Member member, Long id);
     void deleteMember(Long id);
 }

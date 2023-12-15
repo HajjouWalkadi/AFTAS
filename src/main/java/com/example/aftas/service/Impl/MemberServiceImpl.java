@@ -5,6 +5,8 @@ import com.example.aftas.repository.MemberRepository;
 import com.example.aftas.service.MemberService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -22,13 +24,26 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member addMember(Member member) {
+
+        // add accession date and today's date
+        member.setAccessionDate(LocalDate.now());
+        // add identity number do UUId
+        member.setIdentityNumber(java.util.UUID.randomUUID().toString());
+        // add membership number integer and must be unique
+        member.setReferenceNumber((int) (memberRepository.count() + 1));
         return memberRepository.save(member);
     }
 
     @Override
-    public List<Member> searchMember(String name) {
-        return memberRepository.findByName(name);
+    public List<Member> searchByMemberNameOrNumber(String search) {
+        return memberRepository.searchByMemberNameOrNumber(search);
     }
+
+    @Override
+    public List<Member> getAllMembers() {
+        return memberRepository.findAll();
+    }
+
 
     @Override
     public Member updateMember(Member member, Long id) {
