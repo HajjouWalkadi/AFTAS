@@ -10,5 +10,6 @@ public interface HuntingService {
     Hunting addHunting(Hunting hunting);
     List<Hunting> getHuntingsByCompetition(Long competitionId);
     List<Hunting> getHuntingsByCompetitionAndMember(Long competitionId, Long memberId);
+    Hunting updateHunting(Hunting hunting, Long id);
     void deleteHunting(Long id);
 }
