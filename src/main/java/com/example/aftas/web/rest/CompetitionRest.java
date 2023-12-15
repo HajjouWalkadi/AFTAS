@@ -36,7 +36,7 @@ public class CompetitionRest {
         }
     }
 
-    @GetMapping("/{competitionId}/rank")
+ /*   @GetMapping("/{competitionId}/rank")
     public ResponseEntity getCompetitionById(@PathVariable Long competitionId, @RequestParam("memberId") Long memberId) {
         Ranking ranking = rankingService.getRankingById(RankingId.builder().competitionId(competitionId).memberId(memberId).build());
 
@@ -45,7 +45,7 @@ public class CompetitionRest {
         }else {
             return ResponseMessage.ok("Success", ranking);
         }
-    }
+    }*/
 
     @GetMapping
     public ResponseEntity getAllCompetitions() {
@@ -98,12 +98,6 @@ public class CompetitionRest {
             competitionService.deleteCompetition(id);
             return ResponseMessage.ok("Competition deleted successfully", null);
         }
-    }
-
-    @PostMapping("/result-ranking")
-    public ResponseEntity rankingCompetitionResult(@Valid @RequestBody RankingRequestDTO rankingRequestDTO) {
-        Ranking ranking = competitionService.rankingCompetitionResult(rankingRequestDTO.toRanking(), rankingRequestDTO.id());
-        return ResponseMessage.ok("The competition results have been successfully logged", ranking);
     }
 
     @PostMapping("/signin-member")

@@ -21,11 +21,17 @@ public class MemberRest {
 
     @GetMapping("/{id}")
     public ResponseEntity getMemberById(@PathVariable Long id){
-        Member member = memberService.getMemberById(id);
-        if (member == null){
+       return ResponseMessage.ok("Success", memberService.getMemberById(id));
+
+    }
+
+    @GetMapping
+    public ResponseEntity getAllMembers() {
+        List<Member> members = memberService.getAllMembers();
+        if(members.isEmpty()) {
             return ResponseMessage.notFound("Member not found");
         }else {
-            return ResponseMessage.ok("Success", member);
+            return ResponseMessage.ok("Success", members);
         }
     }
 
@@ -41,7 +47,7 @@ public class MemberRest {
 
     @GetMapping("/search")
     public ResponseEntity search(@RequestBody String name) {
-        List<Member> members = memberService.searchMember(name);
+        List<Member> members = memberService.searchByMemberNameOrNumber(name);
         if (members.isEmpty()) {
             return ResponseMessage.notFound("Member not found");
         }else{

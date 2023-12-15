@@ -13,10 +13,9 @@ public interface CompetitionService {
     Competition getCompetitionById(Long code);
     Competition addCompetition(Competition competition);
     List<Competition> getAllCompetitions();
-    List<Competition> searchCompetition(String code);
     Competition updateCompetition(Competition competition, Long id);
     void deleteCompetition(Long id);
-    Ranking rankingCompetitionResult(Ranking ranking, RankingId id);
+    //Ranking rankingCompetitionResult(Ranking ranking, RankingId id);
     Ranking registerMemberCompetition(Ranking ranking);
 
 }
